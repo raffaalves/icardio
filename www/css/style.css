@@ -1,0 +1,317 @@
+/* General
+==================================*/
+h1 {
+    color: #fff;
+    text-shadow: 0 1px 0px #000;
+    font-size: 42px;
+}
+h4, h5{
+  margin: 2px 0;
+  color: #4e4e4e;
+}
+
+
+/* Utilities
+==================================*/
+.title-bordered {
+    border-top: solid 2px #bbb;
+    padding-top: 30px;
+}
+
+p {
+    color: #555;
+    margin: 0 0 25px;
+}
+
+.scroll {
+    height: 100%;
+}
+
+
+/* Menu
+==================================*/
+.menu .bar.bar-header.expanded {
+    transition: all .5s ease-in-out;
+}
+
+.menu-open .bar.bar-header.expanded {
+    background-color: #2b5aa2;
+}
+
+.menu h2 {
+    bottom: 0;
+    font-size: 25px;
+    left: 16px;
+    position: absolute;
+    margin-left: 10px;
+    margin-bottom: 50px;
+}
+.menu h2 span{
+    font-size: 16px;
+}
+.menu .avatar {
+    height: 88px;
+    width: 88px;
+}
+
+.menu.menu-left * {
+    font-weight: bold;
+}
+
+.menu-open .ion-navicon {
+    transform: rotate(-360deg);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.menu-open .ion-navicon:before {
+    content: "\f2ca";
+}
+
+
+/* Login
+==================================*/
+.app-icon {
+    background-color: #fff;
+    background: url('../img/logo.png') center;
+    background-size: cover;
+    /*border-radius: 50%;*/
+    height: 70px;
+    margin: 0 auto;
+    width: 220px;
+}
+.app-icon-bg{
+    background: url('../img/logo.png') center;
+    height: 100px;
+    margin: 0 auto;
+    width: 100px;
+}
+
+.social-login {
+    position: fixed;
+    bottom: 0;
+}
+
+#login-view, .pane, .view{
+  background: url(../img/background.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* CUSTOM
+==================================*/
+/*.item{
+    width: calc(100% - 24px);
+}*/
+
+.hero.no-header{
+    height: 130px;
+}
+
+.item-md-label .input-label {
+    color: #6c6c6c;
+}
+.item-md-label input{
+    background: none;
+    border-bottom: 1px solid #6c6c6c;
+    color: #025a82;
+}
+.item-md-label .hightlight-calm{
+    background: #0293d5;
+}
+
+#login-view .item-md-label .input-label{
+    color: #fff;
+}
+
+#login-view .item-md-label .hightlight-calm{
+    color: #fff;
+}
+#login-view .item-md-label input{
+    border-bottom: 1px solid #fff;
+    color: #fff;
+}
+
+.item-md-label .input-label{
+    letter-spacing: 0.1rem
+}
+
+.item-md-label input.used~.input-label, .item-md-label input:focus~.input-label{
+    text-transform: none;
+}
+
+.bar-calm{
+    background: #2b5aa2 !important;
+}
+
+.title-user{
+    margin-top: 50px !important;
+    margin-bottom: 30px !important;
+    color: #6c6c6c !important;
+}
+.mg-top-40{
+    margin-top: 40px !important;
+}
+.blue-button{
+    background: #2b5aa2;
+    color: #fff;
+}
+.green-button{
+    background: #4caf50;
+    color: #fff;
+}
+.red-button{
+    background: #f44336;
+    color: #fff;
+}
+table{
+    width: 100%;
+}
+thead{
+    border-bottom: 1px solid #6c6c6c;
+}
+th, td {
+    padding: 7px 4px;
+}
+.center {
+    text-align: center;
+}
+
+.btn-big{
+  margin-top: 5%;
+  width: 200px;
+  height: 110px !important;
+}
+.btn-big img{
+  width: 75%
+}
+
+.button-small{
+  font-size: 70%;
+}
+
+.no-pd{
+    border: none;
+    padding: 0;
+    /*margin-bottom: 100px !important;*/
+    border-bottom: 1px solid #000;
+    float: left;
+    width: 100%;
+}
+.col-md-6{
+  width: 50%
+}
+.col-md-4{
+  width: 33.33%
+}
+.col-md-3{
+  width: 25%;
+}
+.f-11{
+  font-size: 11px
+}
+.right{
+  text-align: right;
+}
+
+.form-input, textarea{
+    width: 100%;
+    padding: 10px !important;
+    color: #000 !important;
+    border: 1px solid #b7b7b7 !important;
+    margin-bottom: 10px
+}
+.form-input{
+    height: 50px !important;
+}
+textarea{
+    height: 150px !important;
+}
+
+.button.button-stable{
+    background-color: transparent;
+    color: #444;
+    border: 2px solid #3e3d3d;
+    box-shadow: none;
+}
+
+.block-left{
+    float: left;
+    width: calc(100% - 115px);
+}
+.block-right{
+    float: left;
+    width: 115px;
+}
+.col-block{
+    width: 50%;
+    margin: 0 auto;
+}
+.button.button-light{
+    background: transparent;
+}
+
+.bar .button-stable, .bar .button-stable.activated, .bar .button-stable:active, .bar .button-stable:hover, .bar-stable, .bar-stable.activated, .bar-stable:active, .bar-stable:hover, .button-bar-stable, .button-bar-stable.activated, .button-bar-stable:active, .button-bar-stable:hover, .button-stable, .button-stable.activated, .button-stable:active, .button-stable:hover, .header-stable, .header-stable.activated, .header-stable:active, .header-stable:hover, .stable-bg, .stable-bg.activated, .stable-bg:active, .stable-bg:hover, .stable-border, .stable-border.activated, .stable-border:active, .stable-border:hover{
+    background: #2b5aa2;
+    color: #fff;
+}
+.btn-menu{
+    color: #fff;
+    margin: 0 30px;
+    border-bottom: 1px solid #fff !important;
+    width: calc(100% - 60px);
+}
+
+.mg-t-40{
+    margin-top: 40px;
+}
+.img-cap{
+    width: 100%;
+}
+a.btn-h{
+    float: left;
+    width: 100%;
+}
+.h-2{
+    height: 130px;
+    padding: 5px;
+}
+.h-1{
+    height: 60px;
+    line-height: 20px;
+    padding: 2px;
+    padding-top: 10px;
+}
+.c-6{
+    float: left;
+    padding: 5px;
+    width: 50%;
+}
+.btn-bottom{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.button.button-block, .button.button-full{
+    margin-bottom: 0;
+}
+.font-2{
+    font-size: 120%;
+}
+.title-home{
+    margin-left: 5%;
+}
+.home-content{
+    background: url('../img/bg-home.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+
+
+

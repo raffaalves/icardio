@@ -1,0 +1,19 @@
+<ion-view view-title="Cadastro" id="register-view" align-title="left">
+    <ion-content>
+        <div class="hero no-header flat">
+            <div class="content">
+                <div class="app-icon"></div>
+            </div>
+        </div>
+        <div class="padding mg-t-40">
+            <input placeholder="Nome" class="form-input" ng-model="data.name" required type="text" />
+            <input placeholder="Email" class="form-input" ng-model="data.email" required type="email" />
+            <input placeholder="Data Nascimento" class="form-input" ng-model="data.birthday" required type="date" />
+            <input placeholder="Telefone" class="form-input" ng-model="data.phone" required type="text" />
+            <input placeholder="Senha" class="form-input" ng-model="data.password" required type="password" />
+            <input placeholder="Repetir Senha" class="form-input" ng-model="data.password_confirm" type="password" />
+            <button ng-click="register()" class="button button-full button-stable ink">Cadastrar</button>
+            <button ui-sref="app.login" class="button button-full button-positive">Login</button>
+        </div>
+    </ion-content>
+</ion-view>
