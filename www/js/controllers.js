@@ -136,6 +136,9 @@ angular.module('starter.controllers', [])
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
 
+    console.log(window.localStorage.getItem('user_name'));
+    $scope.user_name = window.localStorage.getItem('user_name');
+
     // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({
@@ -153,16 +156,384 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('ScheduleCtrl', function($scope, $filter, $cordovaLocalNotification, $interval, $ionicPopup, ionicTimePicker, moment) {
+.controller('ScheduleCtrl', function($scope, $filter, $state, $cordovaLocalNotification, $timeout, ionicMaterialMotion, $interval, $ionicPopup, ionicTimePicker, moment) {
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
 
-    var now = new Date().getTime();
-    var timeStart = new Date().getTime() + 1*60*1000; // 1 minute
-    
-    $cordovaLocalNotification.schedule({
-        id: 1,
-        title: 'Title here',
-        text: 'Text here',
-        at: timeStart
+    'use strict';
+    $scope.calendar = {};
+    $scope.changeMode = function (mode) {
+        $scope.calendar.mode = mode;
+    };
+
+    $scope.loadEvents = function () {
+        $scope.calendar.eventSource = createRandomEvents();
+    };
+
+    $scope.onEventSelected = function (event) {
+        console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title);
+    };
+
+    $scope.onViewTitleChanged = function (title) {
+        $scope.viewTitle = title;
+    };
+
+    $scope.today = function () {
+        $scope.calendar.currentDate = new Date();
+    };
+
+    $scope.isToday = function () {
+        var today = new Date(),
+            currentCalendarDate = new Date($scope.calendar.currentDate);
+
+        today.setHours(0, 0, 0, 0);
+        currentCalendarDate.setHours(0, 0, 0, 0);
+        return today.getTime() === currentCalendarDate.getTime();
+    };
+
+    $scope.onTimeSelected = function (selectedTime, events, disabled) {
+        console.log('Selected time: ' + selectedTime + ', hasEvents: ' + (events !== undefined && events.length !== 0) + ', disabled: ' + disabled);
+        $state.go('app.schedule_date', selectedTime);
+    };
+
+    function createRandomEvents() {
+        var events = [];
+        for (var i = 0; i < 50; i += 1) {
+            var date = new Date();
+            var eventType = Math.floor(Math.random() * 2);
+            var startDay = Math.floor(Math.random() * 90) - 45;
+            var endDay = Math.floor(Math.random() * 2) + startDay;
+            var startTime;
+            var endTime;
+            if (eventType === 0) {
+                startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
+                if (endDay === startDay) {
+                    endDay += 1;
+                }
+                endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
+                events.push({
+                    title: 'All Day - ' + i,
+                    startTime: startTime,
+                    endTime: endTime,
+                    allDay: true
+                });
+            } else {
+                var startMinute = Math.floor(Math.random() * 24 * 60);
+                var endMinute = Math.floor(Math.random() * 180) + startMinute;
+                startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
+                endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
+                events.push({
+                    title: 'Event - ' + i,
+                    startTime: startTime,
+                    endTime: endTime,
+                    allDay: false
+                });
+            }
+        }
+        return events;
+    }
+})
+.controller('ScheduleDateCtrl', function($scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+    $scope.presentConfirm = function() {
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Agendar',
+            template: 'Você confirma o agendamento para este horário?',
+            cancelText: 'Não',
+            okText: 'SIM'
+        }).then(function(res) {
+            if (res) {
+                console.log('confirmed');
+            }
+        });
+    }
+})
+
+.controller('InfoCtrl', function($scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+.controller('ApplicationCtrl', function($scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+.controller('ApplicationDetailsCtrl', function($scope, $ionicPopup, ApplicationDetailsService, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+    $scope.items = {};
+    ApplicationDetailsService.list().success(function(data) {
+        $scope.items = data;
+    }).error(function(data) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Erro!',
+            template: 'Nenhuma loja encontrada!'
+        });
     });
-})  
+})
+.controller('ApplicationOrientationCtrl', function($scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+.controller('LocationCtrl', function($scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+.controller('AboutUsCtrl', function($scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+.controller('ContactCtrl', function($scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+.controller('AgreementCtrl', function($scope, AgreementService, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+    $scope.items = {};
+    AgreementService.list().success(function(data) {
+        $scope.items = data;
+    }).error(function(data) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Erro!',
+            template: 'Nenhuma loja encontrada!'
+        });
+    });
+})
+.controller('OptionsCtrl', function($scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+
+.controller('InfoVascularesCtrl', function($scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+
 ;

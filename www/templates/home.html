@@ -2,7 +2,7 @@
     <ion-content ng-class="{expanded:isExpanded}">
         <div class="content has-header">
             <div class="content">
-                <h4 class="title-home">Olá, Rafael</h4>
+                <h4 class="title-home">Olá, {{ user_name }}</h4>
             </div>
         </div>
         <div class="hero no-header flat" style="margin-top: 40%">
@@ -14,18 +14,17 @@
             <div class="btn-bottom">
                 <div class="c-6">
                     <a ui-sref="app.schedule" class="button button-full button-calm-900 center btn-h h-2">
-                        <span class="font-2">Marcação<br/>de<br/>Consulta</span>
+                        <span class="font-2">Agende<br/>sua<br/>Consulta</span>
                     </a>
                 </div>
                 <div class="c-6">
-                    <a href="#/app/profile" class="button button-full button-positive btn-h h-1">
-                        Receitas<br/>Médicas
+                    <a ui-sref="app.options" class="button button-full button-positive btn-h h-1">
+                        Entrar
                     </a>
-                    <a href="#/app/profile" class="button button-full button-energized-900 btn-h h-1">
-                        Orientações<br/>Cardiovasculares
+                    <a href="tel:32227034" class="button button-full button-energized-900 btn-h h-1">
+                        Ligue
                     </a>
                 </div>
-            
             </div>
         </div>
     </ion-content>

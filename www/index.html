@@ -5,12 +5,14 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
     <link href="https://fonts.googleapis.com/css?family=RobotoDraft%3A400%2C500%2C700%2C400italic" rel="stylesheet" type="text/css">
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="lib/ionic/release/css/ionic.css" rel="stylesheet">
     <link href="lib/ion-md-input/css/ion-md-input.min.css" rel="stylesheet">
     <link href="lib/ionic-material/dist/ionic.material.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <link rel="stylesheet" href="lib/ionic-calendar/dist/css/calendar.min.css"/>
+
+    <script src="lib/ionic/release/js/ionic.bundle.min.js"></script>
     <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
     <script src="lib/ion-md-input/js/ion-md-input.min.js"></script>
     <script src="lib/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
@@ -19,6 +21,8 @@
     <script src="lib/moment/locale/pt-br.js"></script>
     <script src="lib/angular-moment/angular-moment.js"></script>
     
+    <script src="lib/ionic-calendar/dist/js/calendar-tpls.js"></script>
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <!-- your app's js -->
@@ -29,5 +33,16 @@
 </head>
 <body ng-app="starter">
     <ion-nav-view></ion-nav-view>
+    <div class="c-12 bg-white">
+        <a ui-sref="app.locations" class="c-4 center">
+            Localização
+        </a>
+        <a ui-sref="app.about_us" class="c-4 center">
+            Quem Somos
+        </a>
+        <a ui-sref="app.contact" class="c-4 center">
+            Contato
+        </a>
+    </div>
 </body>
 </html>

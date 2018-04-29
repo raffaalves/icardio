@@ -1,26 +1,18 @@
-<ion-view view-title="Marcar Consulta" align-title="left">
+<ion-view view-title="Marcar Consulta" align-title="left" ng-init="loadEvents()">
     <ion-content ng-class="{expanded:$scope.isExpanded}">
         <div class="hero no-header flat">
             <div class="content">
                 <div class="app-icon"></div>
             </div>
         </div>
+        
         <div class="padding">
-            <div class="list animate-fade-slide-in-right">
-            
-                <div class="padding">
-                    <div class="col text-center">
-                        <ion-avatar>
-                            <img class="img-cap" ng-src="{{pictureUrl}}">
-                        </ion-avatar>
-                        <a ng-click="alarmcheck()" class="btn-big button button-large button-light flat waves-effect waves-button waves-dark icon pull-center"><img src="img/icon_photo.png"></a>
-                        <p>CAPTURAR IMAGEssssM</p>
-                    </div>
-                </div>
-                <div class="padding">
-                    <button ng-click="details()" class="button button-full button-stable ink mg-top-40">Observações</button>
-                </div>
-            </div>
+            <calendar ng-model="calendar.currentDate" calendar-mode="calendar.mode" event-source="calendar.eventSource"
+                range-changed="reloadSource(startTime, endTime)"
+                event-selected="onEventSelected(event)" title-changed="onViewTitleChanged(title)"
+                time-selected="onTimeSelected(selectedTime, events, disabled)" step="30"></calendar>
+
+            <!-- <calendar calendar-mode="mode" event-source="eventSource" ng-model="selectedDate"></calendar> -->
         </div>
     </ion-content>
 </ion-view>

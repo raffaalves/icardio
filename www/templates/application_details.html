@@ -1,0 +1,20 @@
+<ion-view view-title="Aplicações" align-title="left">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        
+        <div class="item card-item">
+            <div class="card ink ink-dark">
+                <div class="item item-avatar item-text-wrap" ng-repeat="item in items.list track by $index">
+                    {{item.quantity}} {{item.description}}
+                    <div class="card-footer text-right">
+                        <strong>{{item.type}}&nbsp;</strong>
+                        <div class="pull-right">
+                            <i class="icon ion-clock"></i> {{item.created_at}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </ion-content>
+</ion-view>

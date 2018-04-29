@@ -12,19 +12,29 @@
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="right">
-        <ion-header-bar class="dark-bg expanded">
-            <h2>
-                {{loginData.name}}
-                <br/>
-                <span>{{loginData.email}}</span>
-            </h2>
-        </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
             <ion-list>
-                <ion-item class="btn-menu" nav-clear menu-close ui-sref="app.home">
-                    Home
+                <ion-item class="btn-menu" nav-clear menu-close ui-sref="app.schedule">
+                    Agende sua Consultas
                 </ion-item>
-
+                <ion-item class="btn-menu" nav-clear menu-close ui-sref="app.application_details">
+                    Aplicações de Escleroterapia
+                </ion-item>
+                <ion-item class="btn-menu" nav-clear menu-close ui-sref="app.informations">
+                    Orientações
+                </ion-item>
+                <ion-item class="btn-menu" nav-clear menu-close ui-sref="app.agreement">
+                    Convênios
+                </ion-item>
+                <ion-item class="btn-menu" nav-clear menu-close ui-sref="app.about_us">
+                    Quem Somos
+                </ion-item>
+                <ion-item class="btn-menu" nav-clear menu-close ui-sref="app.locations">
+                    Localização
+                </ion-item>
+                <ion-item class="btn-menu" nav-clear menu-close ui-sref="app.contact">
+                    Contato
+                </ion-item>
                 <ion-item class="btn-menu" nav-clear menu-close ng-click="logout()">
                     SAIR
                 </ion-item>

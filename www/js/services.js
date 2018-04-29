@@ -14,7 +14,7 @@ angular.module('starter.services',[])
 
                 var req = {
                     method: 'POST',
-                    url: endpointBase + '/api/v1/login',
+                    url: endpointBase + '/api/login',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -25,11 +25,18 @@ angular.module('starter.services',[])
                 }
 
                 $http(req).then(function(ret){
-                    window.localStorage.setItem('access_token', ret.data.token);
-                    window.localStorage.setItem('user_id', ret.data.user.id);
-                    window.localStorage.setItem('user_name', ret.data.user.name);
-                    window.localStorage.setItem('user_email', ret.data.user.email);
-                    deferred.resolve('');
+                    
+                    if (ret.data.error) {
+                        deferred.reject(ret.data.message);
+                    } else {
+                        //window.localStorage.setItem('access_token', ret.data.token);
+                        window.localStorage.setItem('user_id', ret.data.id);
+                        window.localStorage.setItem('user_name', ret.data.name);
+                        window.localStorage.setItem('user_email', ret.data.email);
+                        window.localStorage.setItem('user_phone', ret.data.phone);
+                        window.localStorage.setItem('user_birthday', ret.data.birthday);
+                        deferred.resolve('');
+                    }
                     $ionicLoading.hide();
                 }, function(ret){
                     $ionicLoading.hide();
@@ -66,7 +73,7 @@ angular.module('starter.services',[])
 
                 var req = {
                     method: 'POST',
-                    url: endpointBase + '/api/v1/register',
+                    url: endpointBase + '/api/register',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -80,15 +87,22 @@ angular.module('starter.services',[])
                 }
 
                 $http(req).then(function(ret){
-                    window.localStorage.setItem('access_token', ret.data.token);
-                    window.localStorage.setItem('user_id', ret.data.user.id);
-                    window.localStorage.setItem('user_name', ret.data.user.name);
-                    window.localStorage.setItem('user_email', ret.data.user.email);
-                    deferred.resolve('');
+                    
+                    if (ret.data.error) {
+                        deferred.reject(ret.data.message);
+                    } else {
+                        //window.localStorage.setItem('access_token', ret.data.token);
+                        window.localStorage.setItem('user_id', ret.data.id);
+                        window.localStorage.setItem('user_name', ret.data.name);
+                        window.localStorage.setItem('user_email', ret.data.email);
+                        window.localStorage.setItem('user_phone', ret.data.phone);
+                        window.localStorage.setItem('user_birthday', ret.data.birthday);
+                        deferred.resolve('');
+                    }
                     $ionicLoading.hide();
                 }, function(ret){
                     $ionicLoading.hide();
-                    deferred.reject('Dados incorretos.');
+                    deferred.reject('Usuário/Senha incorretos.');
                 });
             } else {
                 deferred.reject('Campos são obrigatórios.');
@@ -107,11 +121,11 @@ angular.module('starter.services',[])
     }
 })
 
-.service('ItemService', function($q, $ionicLoading, endpointBase, $http, $state, $templateCache) {
+.service('AgreementService', function($q, $ionicLoading, endpointBase, $http, $state, $templateCache) {
     var auth = window.localStorage.getItem('access_token');
 
     return {
-        findList: function(tax_document, cod) {
+        list: function() {
             $ionicLoading.show({
                 noBackdrop :false,
                 template: ' <ion-spinner icon="spiral"></ion-spinner>',
@@ -121,7 +135,7 @@ angular.module('starter.services',[])
 
             var req = {
                 method: 'GET',
-                url: endpointBase + '/api/v1/stores/find-by?tax_document=' + tax_document + '&cod=' + cod,
+                url: endpointBase + '/api/convenio',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + auth
@@ -137,145 +151,8 @@ angular.module('starter.services',[])
                 }
             }, function(ret){
                 $ionicLoading.hide();
-                if (ret.status == 401) {
-                    $state.go('app.login');
-                }
-                deferred.reject('Usuário/Senha incorretos.');
+                deferred.reject('Erro.');
             });
-
-            promise.success = function(fn) {
-                promise.then(fn);
-                return promise;
-            }
-            promise.error = function(fn) {
-                promise.then(null, fn);
-                return promise;
-            }
-            return promise;
-        },
-        edit: function(id, status) {
-            $ionicLoading.show({
-                noBackdrop :false,
-                template: ' <ion-spinner icon="spiral"></ion-spinner>',
-            });
-            var deferred = $q.defer();
-            var promise = deferred.promise;
-
-            var req = {
-                method: 'PUT',
-                url: endpointBase + '/api/v1/orders/' + id,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + auth
-                },
-                data: {
-                    order: {
-                        // status aceitos: pending, received, delivered
-                        status: status
-                    }
-                }
-            }
-
-            $http(req).then(function(ret){
-                $ionicLoading.hide();
-                deferred.resolve(ret);
-            }, function(ret){
-                $ionicLoading.hide();
-                if (ret.status == 401) {
-                    $state.go('app.login');
-                }
-                deferred.reject('Erro ao editar.');
-            });
-
-            promise.success = function(fn) {
-                promise.then(fn);
-                return promise;
-            }
-            promise.error = function(fn) {
-                promise.then(null, fn);
-                return promise;
-            }
-            return promise;
-        },
-        editWithPhoto: function(id, photo) {
-            var deferred = $q.defer();
-            var promise = deferred.promise;
-            if (photo != undefined) {
-                $ionicLoading.show({
-                    noBackdrop :false,
-                    template: ' <ion-spinner icon="spiral"></ion-spinner>',
-                });
-                var req = {
-                    method: 'PUT',
-                    url: endpointBase + '/api/v1/stores/' + id,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + auth
-                    },
-                    data: {
-                        image: photo,
-                        user_id: window.localStorage.getItem('user_id')
-                    }
-                }
-
-                $http(req).then(function(ret){
-                    $ionicLoading.hide();
-                    deferred.resolve(ret);
-                }, function(ret){
-                    $ionicLoading.hide();
-                    if (ret.status == 401) {
-                        $state.go('app.login');
-                    }
-                    deferred.reject('Erro ao subir imagem.');
-                });
-            } else {
-                deferred.reject('Foto é obrigatória.');
-            }
-
-            promise.success = function(fn) {
-                promise.then(fn);
-                return promise;
-            }
-            promise.error = function(fn) {
-                promise.then(null, fn);
-                return promise;
-            }
-            return promise;
-        },
-        storeDetails: function(id, detail) {
-            var deferred = $q.defer();
-            var promise = deferred.promise;
-            if (detail != undefined) {
-                $ionicLoading.show({
-                    noBackdrop :false,
-                    template: ' <ion-spinner icon="spiral"></ion-spinner>',
-                });
-                var req = {
-                    method: 'PUT',
-                    url: endpointBase + '/api/v1/stores/' + id,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + auth
-                    },
-                    data: {
-                        obs: detail,
-                        user_id: window.localStorage.getItem('user_id')
-                    }
-                }
-
-                $http(req).then(function(ret){
-                    $ionicLoading.hide();
-                    deferred.resolve(ret);
-                }, function(ret){
-                    $ionicLoading.hide();
-                    if (ret.status == 401) {
-                        $state.go('app.login');
-                    }
-                    deferred.reject('Erro salvar.');
-                });
-            } else {
-                deferred.reject('Descição é Obrigatória.');
-            }
 
             promise.success = function(fn) {
                 promise.then(fn);
@@ -290,4 +167,49 @@ angular.module('starter.services',[])
     }
 })
 
+.service('ApplicationDetailsService', function($q, $ionicLoading, endpointBase, $http, $state, $templateCache) {
+    var auth = window.localStorage.getItem('access_token');
+
+    return {
+        list: function() {
+            $ionicLoading.show({
+                noBackdrop :false,
+                template: ' <ion-spinner icon="spiral"></ion-spinner>',
+            });
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+
+            var req = {
+                method: 'GET',
+                url: endpointBase + '/api/paciente/'+ window.localStorage.getItem('user_id') +'/aplicacao',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + auth
+                }
+            }
+
+            $http(req).then(function(ret){
+                $ionicLoading.hide();
+                if (ret.data.length == 0) {
+                    deferred.reject('Nenhum item localizado.');
+                } else {
+                    deferred.resolve(ret.data);
+                }
+            }, function(ret){
+                $ionicLoading.hide();
+                deferred.reject('Erro.');
+            });
+
+            promise.success = function(fn) {
+                promise.then(fn);
+                return promise;
+            }
+            promise.error = function(fn) {
+                promise.then(null, fn);
+                return promise;
+            }
+            return promise;
+        }
+    }
+})
 ;

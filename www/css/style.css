@@ -36,6 +36,7 @@ p {
 
 .menu-open .bar.bar-header.expanded {
     background-color: #2b5aa2;
+    background: none;
 }
 
 .menu h2 {
@@ -45,6 +46,7 @@ p {
     position: absolute;
     margin-left: 10px;
     margin-bottom: 50px;
+    color: #2b5aa2;
 }
 .menu h2 span{
     font-size: 16px;
@@ -263,6 +265,42 @@ textarea{
     border-bottom: 1px solid #fff !important;
     width: calc(100% - 60px);
 }
+.menu-inter, .menu-inter2{
+    margin: 0 10px;
+}
+.menu-inter .btn-menu{
+    color: #000;
+    float: left;
+    margin: 0 10px;
+    width: calc(100% - 20px);
+}
+.menu-inter .btn-menu a.item-content{
+    color: #000 !important;
+    padding: 10px 5px;
+}
+.menu-inter .btn-menu a.item-content span{
+    float: left;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.menu-inter2 .btn-menu{
+    color: #000;
+    float: left;
+    margin: 5px;
+    background: #d5e1e4;
+    width: calc(50% - 10px);
+}
+.menu-inter2 .btn-menu a.item-content{
+    color: #000 !important;
+    padding: 10px 5px;
+    text-align: center;
+}
+.menu-inter2 .btn-menu a.item-content span{
+    float: left;
+    width: 100%;
+    margin-top: 5px;
+}
 
 .mg-t-40{
     margin-top: 40px;
@@ -280,7 +318,7 @@ a.btn-h{
 }
 .h-1{
     height: 60px;
-    line-height: 20px;
+    line-height: 40px;
     padding: 2px;
     padding-top: 10px;
 }
@@ -289,9 +327,17 @@ a.btn-h{
     padding: 5px;
     width: 50%;
 }
+.c-4{
+    float: left;
+    padding: 5px; 
+    width: 33.33%
+}
+.center{
+    text-align: center;
+}
 .btn-bottom{
     position: fixed;
-    bottom: 0;
+    bottom: 30px;
     width: 100%;
 }
 .button.button-block, .button.button-full{
@@ -310,8 +356,51 @@ a.btn-h{
     -o-background-size: cover;
     background-size: cover;
 }
+.item-bg{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: linear-gradient(#fbf8fe, #fff);
+}
+.card .item.item-avatar{
+    padding-left: 30px
+}
 
-
+.bg-white{
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.bg-white a{
+    color: #4e4e4e;
+    text-decoration: none;
+    font-weight: bold;
+}
+.list-schedule .item{
+    color: #000;
+    background: #fff;
+}
+.list-schedule .item button, .list-schedule .item span{
+    float: right;
+}
+.list-schedule .item .item-content{
+    padding: 16px;
+}
+.list-schedule .item.btn-block{
+    color: #949393;
+    background: #f5f5f5;
+}
+.menu-option .btb-menu{
+    float: left;
+    color: #000
+    margin: 0 10px;
+    background: #fff;
+    width: calc(50% - 20px);
+}
+.has-expanded-header {
+    top: 0px !important;
+}
 
 
 

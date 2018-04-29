@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.controllers', 'starter.constants', 'ionic-material', 'ionMdInput', 'ionic-timepicker', 'angularMoment'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.controllers', 'starter.constants', 'ionic-material', 'ionMdInput', 'ionic-timepicker', 'angularMoment', 'ui.rCalendar'])
 
 .run(function($ionicPlatform, $state) {
 
@@ -107,7 +107,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.co
                 controller: 'ScheduleCtrl'
             },
             'fabContent': {
-                template: '<button id="fab-activity" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-paper-airplane"></i></button>',
+                template: '',
                 controller: function ($timeout) {
                     /*$timeout(function () {
                      document.getElementById('fab-profile').classList.toggle('on');
@@ -121,15 +121,262 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.services', 'starter.co
   			}
     })
 
-    .state('app.profile', {
-        url: '/profile',
+    .state('app.schedule_date', {
+        url: '/schedule-date',
         views: {
             'menuContent': {
-                templateUrl: 'templates/profile.html',
-                controller: 'ProfileCtrl'
+                templateUrl: 'templates/schedule_date.html',
+                controller: 'ScheduleDateCtrl'
             },
             'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                     document.getElementById('fab-profile').classList.toggle('on');
+                     }, 800);*/
+                }
+            }
+        },
+        params:
+                {
+            'data': ''
+            }
+    })
+
+    .state('app.informations', {
+        url: '/informations',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/informations.html',
+                controller: 'InfoCtrl'
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+
+    .state('app.locations', {
+        url: '/locations',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/locations.html',
+                controller: 'LocationCtrl'
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+    .state('app.about_us', {
+        url: '/about-us',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/about_us.html',
+                controller: function($scope, $ionicLoading, $http, $stateParams, endpointBase) {
+                    $http({
+                        method: 'GET',
+                        url: endpointBase + '/api/sobre-nos',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(function(ret){
+                        $ionicLoading.hide();
+                        console.log(ret);
+                        $scope.data = ret.data;
+                    }, function(ret){
+                        $ionicLoading.hide();
+                        deferred.reject('Erro.');
+                    });
+                }
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+    .state('app.contact', {
+        url: '/contact',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/contact.html',
+                controller: 'ContactCtrl'
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+    .state('app.agreement', {
+        url: '/agreement',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/agreement.html',
+                controller: 'AgreementCtrl'
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+
+    .state('app.options', {
+        url: '/options',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/options.html',
+                controller: 'OptionsCtrl'
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+
+    .state('app.applications', {
+        url: '/applications',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/applications.html',
+                controller: 'ApplicationCtrl'
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+
+    .state('app.application_orientations', {
+        url: '/application-orientations',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/application_orientations.html',
+                controller: 'ApplicationOrientationCtrl'
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+
+    .state('app.application_details', {
+        url: '/application_details',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/application_details.html',
+                controller: 'ApplicationDetailsCtrl'
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+
+    .state('app.info_vasculares', {
+        url: '/info_vasculares',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/info_vasculares.html',
+                controller: 'InfoVascularesCtrl'
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+
+    .state('app.info_preparo', {
+        url: '/info_preparo',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/info_preparo.html',
+                controller: 'InfoVascularesCtrl'
+            },
+            'fabContent': {
+                template: '',
+                controller: function ($timeout) {
+                    /*$timeout(function () {
+                        document.getElementById('fab-profile').classList.toggle('on');
+                    }, 800);*/
+                }
+            }
+        }
+    })
+
+    .state('app.info_type', {
+        url: '/info/:type/:name',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/info.html',
+                controller: function($scope, $ionicLoading, $http, $stateParams, endpointBase) {
+                    $http({
+                        method: 'GET',
+                        url: endpointBase + '/api/orientacoes/'+ $stateParams.type +'/' + $stateParams.name,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(function(ret){
+                        $ionicLoading.hide();
+                        console.log(ret);
+                        $scope.data = ret.data;
+                    }, function(ret){
+                        $ionicLoading.hide();
+                        deferred.reject('Erro.');
+                    });
+                }
+            },
+            'fabContent': {
+                template: '',
                 controller: function ($timeout) {
                     /*$timeout(function () {
                         document.getElementById('fab-profile').classList.toggle('on');
