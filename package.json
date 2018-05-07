@@ -26,7 +26,6 @@
         "cordova-plugin-whitelist": "git+https://github.com/apache/cordova-plugin-whitelist.git",
         "cordova-plugin-x-socialsharing": "~5.1.7",
         "cordova-sms-plugin": "~0.1.11",
-        "cordova-sqlite-storage": "git+https://github.com/litehelpers/Cordova-sqlite-storage.git",
         "de.appplant.cordova.plugin.local-notification": "https://github.com/katzer/cordova-plugin-local-notifications",
         "gulp": "^3.5.6",
         "gulp-concat": "^2.2.0",
