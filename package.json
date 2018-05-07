@@ -68,7 +68,6 @@
             "cordova-sms-plugin": {},
             "org.devgeeks.Canvas2ImagePlugin": {},
             "cordova-plugin-image-picker": {},
-            "cordova-sqlite-storage": {},
             "cordova-plugin-flashlight": {},
             "de.appplant.cordova.plugin.local-notification": {},
             "cordova-plugin-extension": {}
