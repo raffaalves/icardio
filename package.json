@@ -14,6 +14,7 @@
         "cordova-plugin-contacts": "~2.3.0",
         "cordova-plugin-device": "~1.1.4",
         "cordova-plugin-email-composer": "^0.8.15",
+        "cordova-plugin-extension": "~1.5.1",
         "cordova-plugin-flashlight": "git+https://github.com/EddyVerbruggen/Flashlight-PhoneGap-Plugin.git",
         "cordova-plugin-image-picker": "git+https://github.com/wymsee/cordova-imagePicker.git",
         "cordova-plugin-inappbrowser": "~1.7.0",
@@ -46,7 +47,9 @@
         "shelljs": "^0.3.0"
     },
     "cordova": {
-        "platforms": [],
+        "platforms": [
+            "android"
+        ],
         "plugins": {
             "cordova-plugin-local-notification": {},
             "cordova-plugin-whitelist": {},
